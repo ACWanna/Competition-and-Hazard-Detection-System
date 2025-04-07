@@ -1,0 +1,124 @@
+{
+    "circuit": {
+      "name": "测试电路-全加器",
+      "expression": "(A AND B) OR (B AND C) OR (A AND C)",
+      "inputs": [
+        {
+          "id": "a",
+          "name": "A",
+          "initial_value": 0
+        },
+        {
+          "id": "b",
+          "name": "B",
+          "initial_value": 0
+        },
+        {
+          "id": "c",
+          "name": "C",
+          "initial_value": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "sum",
+          "name": "SUM",
+          "source": "g5"
+        },
+        {
+          "id": "carry",
+          "name": "CARRY",
+          "source": "g4"
+        }
+      ],
+      "gates": [
+        {
+          "id": "g1",
+          "type": "AND",
+          "delay": 2.0,
+          "inputs": ["a", "b"],
+          "output": "g1"
+        },
+        {
+          "id": "g2",
+          "type": "AND",
+          "delay": 2.0,
+          "inputs": ["b", "c"],
+          "output": "g2"
+        },
+        {
+          "id": "g3",
+          "type": "AND",
+          "delay": 2.0,
+          "inputs": ["a", "c"],
+          "output": "g3"
+        },
+        {
+          "id": "g4",
+          "type": "OR",
+          "delay": 1.5,
+          "inputs": ["g1", "g2"],
+          "output": "carry"
+        },
+        {
+          "id": "g5",
+          "type": "XOR",
+          "delay": 2.5,
+          "inputs": ["g4", "g3"],
+          "output": "sum"
+        }
+      ],
+      "connections": [
+        {
+          "from": "a",
+          "to": "g1",
+          "delay": 0.1
+        },
+        {
+          "from": "b",
+          "to": "g1",
+          "delay": 0.1
+        },
+        {
+          "from": "b",
+          "to": "g2",
+          "delay": 0.2
+        },
+        {
+          "from": "c",
+          "to": "g2",
+          "delay": 0.1
+        },
+        {
+          "from": "a",
+          "to": "g3",
+          "delay": 0.15
+        },
+        {
+          "from": "c",
+          "to": "g3",
+          "delay": 0.15
+        },
+        {
+          "from": "g1",
+          "to": "g4",
+          "delay": 0.1
+        },
+        {
+          "from": "g2",
+          "to": "g4",
+          "delay": 0.1
+        },
+        {
+          "from": "g4",
+          "to": "g5",
+          "delay": 0.2
+        },
+        {
+          "from": "g3",
+          "to": "g5",
+          "delay": 0.1
+        }
+      ]
+    }
+  }
